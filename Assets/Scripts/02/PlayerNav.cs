@@ -11,7 +11,9 @@ public class PlayerNav : MonoBehaviour {
 	void Start () {
 		m_NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 		end_Transform = GameObject.Find("End").GetComponent<Transform>();
-		m_NavMeshAgent.SetDestination(end_Transform.position);
+		// set destination by math
+		// m_NavMeshAgent.SetDestination(end_Transform.position);
+		m_NavMeshAgent.destination = end_Transform.position;
 	}
 	
 
