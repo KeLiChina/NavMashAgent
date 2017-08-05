@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	private NavMeshAgent m_NavMeshAgent;
 	private Ray ray;
 	private RaycastHit hit;
+	public GameObject prefabs_Arrow;
 	void Start () {
 		m_Transform = gameObject.GetComponent<Transform>();
 		m_NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -28,7 +29,17 @@ public class Player : MonoBehaviour {
 			if(Physics.Raycast(ray,out hit))
 			{
 				m_NavMeshAgent.SetDestination(hit.point);
+				CreateArrow(hit.point);
+				
 			}
 		}
+	}
+	private void CreateArrow(Vector3 pos)
+	{
+		Vector3 temp = pos + new Vector3(0,0.5f,0);
+		
+		GameObject go = Instantiate(prefabs_Arrow,temp,Quaternion.identity);
+		go.GetComponent<ArrowEffectManager>().PlayEffect();
+		GameObject.Destroy(go,1f);
 	}
 }
