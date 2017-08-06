@@ -9,16 +9,19 @@ public class Player : MonoBehaviour {
 	private NavMeshAgent m_NavMeshAgent;
 	private Ray ray;
 	private RaycastHit hit;
+	private Animator m_Animator;
 	public GameObject prefabs_Arrow;
 	void Start () {
 		m_Transform = gameObject.GetComponent<Transform>();
 		m_NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+		m_Animator = gameObject.GetComponent<Animator>();
 		
 	}
 	
 	
 	void Update () {
 		PlayerMovByNav();
+		IdelOrRun();
 	}
 	private void PlayerMovByNav()
 	{
@@ -41,5 +44,16 @@ public class Player : MonoBehaviour {
 		GameObject go = Instantiate(prefabs_Arrow,temp,Quaternion.identity);
 		go.GetComponent<ArrowEffectManager>().PlayEffect();
 		GameObject.Destroy(go,1f);
+	}
+	private void IdelOrRun()
+	{
+		if(Mathf.Abs(m_NavMeshAgent.remainingDistance) <= 0.1f )
+		{
+			m_Animator.SetBool("isRun",false);
+		}
+		else
+		{
+			m_Animator.SetBool("isRun",true);
+		}
 	}
 }
