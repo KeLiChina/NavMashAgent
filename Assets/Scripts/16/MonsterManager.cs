@@ -24,10 +24,21 @@ public class MonsterManager : MonoBehaviour {
 	{
 		for (int i = 1; i < points.Length; i++)
 		{
-			GameObject temp = GameObject.Instantiate(prefab_AAA,points[i].position,Quaternion.identity);
-			Monster monster = temp.AddComponent<Monster>();
-			monster.SetTarget(playername);
-			monsterList.Add(temp);
+			if( i <= 2)
+			{
+				//  temp = GameObject.Instantiate(prefab_AAA,points[i].position,Quaternion.identity);
+		        //  Monster monster = temp.AddComponent<Monster>();
+			    //  monster.SetTarget(playername,2f);
+				CreateMonster(2f,i,prefab_AAA);
+			}
+			else
+			{
+				//  temp = GameObject.Instantiate(prefab_BBB,points[i].position,Quaternion.identity);
+				//  Monster monster = temp.AddComponent<Monster>();
+				//  monster.SetTarget(playername,5f);
+				CreateMonster(5f,i,prefab_BBB);
+			}
+
 			// temp.GetComponent<NavMeshAgent>().SetDestination();
 			
 		}
@@ -38,5 +49,13 @@ public class MonsterManager : MonoBehaviour {
 		{
 			CreateMonsters();
 		}
+	}
+	private void CreateMonster(float dis,int index,GameObject prefab)
+	{
+		GameObject temp = GameObject.Instantiate(prefab,points[index].position,Quaternion.identity);
+		Monster monster = temp.AddComponent<Monster>();
+		monster.SetTarget(playername,dis);
+		temp.transform.SetParent(m_Transform);			
+		monsterList.Add(temp);
 	}
 }
