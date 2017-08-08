@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 	private RaycastHit hit;
 	private Animator m_Animator;
 	public GameObject prefabs_Arrow;
+	public GameObject prefabs_Trap;
 	void Start () {
 		m_Transform = gameObject.GetComponent<Transform>();
 		m_NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -22,6 +23,10 @@ public class Player : MonoBehaviour {
 	void Update () {
 		PlayerMovByNav();
 		IdelOrRun();
+		if(Input.GetKeyDown(KeyCode.T))
+		{
+			Trap(m_Transform.position + new Vector3(0f,0.3f,0f),prefabs_Trap);
+		}
 	}
 	private void PlayerMovByNav()
 	{
@@ -55,5 +60,14 @@ public class Player : MonoBehaviour {
 		{
 			m_Animator.SetBool("isRun",true);
 		}
+	}
+	private void Trap(Vector3 pos,GameObject prefabTrap)
+	{
+	    GameObject go =	Instantiate(prefabTrap,pos,Quaternion.identity);
+		go.AddComponent<Trap>();
+		SphereCollider sc = go.AddComponent<SphereCollider>();
+		sc.isTrigger = true;
+		sc.radius = 0.8f;
+		GameObject.Destroy(go,5f);
 	}
 }
