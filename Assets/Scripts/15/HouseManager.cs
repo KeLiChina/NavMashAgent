@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HouseManager : MonoBehaviour {
-
+	public static HouseManager instance;
 	private Transform wall_1_Transform;
 	private Transform wall_2_Transform;
 
+	void Awake()
+	{
+		if (instance == null)
+			instance = this;
+		else if(instance != this)
+			Destroy(gameObject);
+	}
 	void Start () {
 		wall_1_Transform = GameObject.Find("ENV/Wall_1").GetComponent<Transform>();
 		wall_2_Transform = GameObject.Find("ENV/Wall_2").GetComponent<Transform>();
@@ -34,6 +41,14 @@ public class HouseManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.05f);
 		}
 		// yield return new WaitForSeconds(1f);
+	}
+	public void WallOpenOne()
+	{
+		StartCoroutine(WallOpen(wall_1_Transform));
+	}
+	public void WallOpenTwe()
+	{
+		StartCoroutine(WallOpen(wall_2_Transform));
 	}
 	
 }
