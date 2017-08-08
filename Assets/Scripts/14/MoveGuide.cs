@@ -46,6 +46,7 @@ public class MoveGuide : MonoBehaviour {
 		{
 			GameObject.Destroy(targetEffect);
 			GameObject.Destroy(lineEffect);
+			HouseManager.instance.WallOpenOne();
 			// CreateEffect(point_1.position,point_2.position);
 		}
 	}

@@ -61,5 +61,10 @@ public class MonsterManager : MonoBehaviour {
 	public void UpdateMonsterList(GameObject go)
 	{
 		monsterList.Remove(go);
+
+		if(monsterList.Count == 0)
+		{
+			HouseManager.instance.WallOpenTwe();
+		}
 	}
 }
