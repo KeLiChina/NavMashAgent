@@ -15,8 +15,8 @@ public class MonsterManager : MonoBehaviour {
 		m_Transform = gameObject.GetComponent<Transform>();
 		points = GameObject.Find("CreatePoints").GetComponent<Transform>()
 		.GetComponentsInChildren<Transform>();
-		prefab_AAA = Resources.Load<GameObject>("AAA");
-		prefab_BBB = Resources.Load<GameObject>("BBB");
+		prefab_AAA = Resources.Load<GameObject>("Goblin_rouge");
+		prefab_BBB = Resources.Load<GameObject>("Goblin_rouge");
 		
 	}
 	
