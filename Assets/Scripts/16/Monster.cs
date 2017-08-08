@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour {
 	private Transform player_Transform;
 	private float distance;
 	private bool alive = true;
+	private Animator m_Animator;
 	public bool Alive{
 		get{return alive;}
 		set{alive = value;
@@ -19,6 +20,7 @@ public class Monster : MonoBehaviour {
 	void Awake () {
 		m_NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 		m_Transform = gameObject.GetComponent<Transform>();
+		m_Animator = gameObject.GetComponent<Animator>();
 		// m_NavMeshAgent.SetDestination();
 	}
 	
@@ -53,6 +55,11 @@ public class Monster : MonoBehaviour {
 			if (Vector3.Distance(m_Transform.position,player_Transform.position) > distance)
 			{
 				m_NavMeshAgent.SetDestination(player_Transform.position);
+				m_Animator.SetBool("attack",false);			
+			}
+			else
+			{
+				m_Animator.SetBool("attack",true);
 			}
 			yield return new WaitForSeconds(offtime);
 		}
