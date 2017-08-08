@@ -58,4 +58,8 @@ public class MonsterManager : MonoBehaviour {
 		temp.transform.SetParent(m_Transform);			
 		monsterList.Add(temp);
 	}
+	public void UpdateMonsterList(GameObject go)
+	{
+		monsterList.Remove(go);
+	}
 }

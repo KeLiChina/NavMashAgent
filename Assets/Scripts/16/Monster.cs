@@ -10,6 +10,12 @@ public class Monster : MonoBehaviour {
 	private Transform player_Transform;
 	private float distance;
 	private bool alive = true;
+	public bool Alive{
+		get{return alive;}
+		set{alive = value;
+			SendMessageUpwards("UpdateMonsterList",gameObject);
+		}
+	}
 	void Awake () {
 		m_NavMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 		m_Transform = gameObject.GetComponent<Transform>();
